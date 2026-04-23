@@ -9,7 +9,7 @@ import time
 import requests
 import json
 import pandas as pd
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 pd.set_option("display.max_columns", None)
 pd.set_option("display.max_colwidth", 60)
@@ -60,15 +60,13 @@ ledger = load_ledger()
 print("Ledger loaded:", {k: len(v) for k, v in ledger.items()}, "windows completed")
 ```
 
-    Ledger loaded: {'rn1': 0, 'sovereign': 0, 'swisstony': 0} windows completed
+    Ledger loaded: {'rn1': 42, 'sovereign': 38, 'swisstony': 37} windows completed
 
 
 ## HTTP Caller
 
 
 ```python
-import time
-
 def get(base_url, endpoint, params=None, retries=3, backoff=2.0):
     """
     GET request with simple retry on transient connection errors.
@@ -119,62 +117,62 @@ for name, address in WALLETS.items():
     First record:
     {
       "proxyWallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
-      "asset": "77985259937045308793816579916638590572189987943927681873921893711796592307973",
-      "conditionId": "0xa9a9acb457b3567dd8d1cacaa400ae6aec8e63f858a4560afdb612161e43e57c",
-      "size": 181369.1314,
-      "avgPrice": 0.6281,
-      "initialValue": 113919.221,
-      "currentValue": 58944.9677,
-      "cashPnl": -54974.2533,
-      "percentPnl": -48.2572,
-      "totalBought": 181684.2282,
+      "asset": "1085310679959577834629905872167609894989809542716168749768240119209698690157",
+      "conditionId": "0xd57db42dc26f8cdd6f26e9148ba5b40775af15ea104b6d0068ebfd4c7342d7aa",
+      "size": 168767.8979,
+      "avgPrice": 0.3264,
+      "initialValue": 55090.7361,
+      "currentValue": 22783.6662,
+      "cashPnl": -32307.0699,
+      "percentPnl": -58.6433,
+      "totalBought": 169734.0224,
       "realizedPnl": 0,
-      "percentRealizedPnl": -48.3469,
-      "curPrice": 0.325,
+      "percentRealizedPnl": -58.8787,
+      "curPrice": 0.135,
       "redeemable": false,
       "mergeable": true,
-      "title": "Timberwolves vs. Nuggets",
-      "slug": "nba-min-den-2026-04-20",
+      "title": "Rockets vs. Lakers",
+      "slug": "nba-hou-lal-2026-04-21",
       "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png",
-      "eventId": "382090",
-      "eventSlug": "nba-min-den-2026-04-20",
-      "outcome": "Nuggets",
-      "outcomeIndex": 1,
-      "oppositeOutcome": "Timberwolves",
-      "oppositeAsset": "101049751548410708430293002292169561720588907594020452919685141368802218026926",
-      "endDate": "2026-04-21",
+      "eventId": "382093",
+      "eventSlug": "nba-hou-lal-2026-04-21",
+      "outcome": "Rockets",
+      "outcomeIndex": 0,
+      "oppositeOutcome": "Lakers",
+      "oppositeAsset": "45949080565643676028230495363401189884973675894037073023779613649229440981535",
+      "endDate": "2026-04-22",
       "negativeRisk": false
     }
     
-    === sovereign — 77 open positions ===
+    === sovereign — 39 open positions ===
     Fields: ['proxyWallet', 'asset', 'conditionId', 'size', 'avgPrice', 'initialValue', 'currentValue', 'cashPnl', 'percentPnl', 'totalBought', 'realizedPnl', 'percentRealizedPnl', 'curPrice', 'redeemable', 'mergeable', 'title', 'slug', 'icon', 'eventId', 'eventSlug', 'outcome', 'outcomeIndex', 'oppositeOutcome', 'oppositeAsset', 'endDate', 'negativeRisk']
     First record:
     {
       "proxyWallet": "0xee613b3fc183ee44f9da9c05f53e2da107e3debf",
-      "asset": "101049751548410708430293002292169561720588907594020452919685141368802218026926",
-      "conditionId": "0xa9a9acb457b3567dd8d1cacaa400ae6aec8e63f858a4560afdb612161e43e57c",
-      "size": 21010.072,
-      "avgPrice": 0.364,
-      "initialValue": 7648.3385,
-      "currentValue": 14181.7986,
-      "cashPnl": 6533.46,
-      "percentPnl": 85.4232,
-      "totalBought": 39198.0727,
-      "realizedPnl": 2401.2866,
-      "percentRealizedPnl": -0.6135,
-      "curPrice": 0.675,
+      "asset": "83993024274387765539759485552031958770178918792546828081099848196418729481237",
+      "conditionId": "0x2d87bca4fdb59ce4a91fd4f5bd5ca7ddd19a15097ff2f7b508bca3df99911b28",
+      "size": 10784.55,
+      "avgPrice": 0.4197,
+      "initialValue": 4527.2354,
+      "currentValue": 4475.5882,
+      "cashPnl": -51.6472,
+      "percentPnl": -1.1408,
+      "totalBought": 12389.55,
+      "realizedPnl": 128.7386,
+      "percentRealizedPnl": -13.9474,
+      "curPrice": 0.415,
       "redeemable": false,
       "mergeable": true,
-      "title": "Timberwolves vs. Nuggets",
-      "slug": "nba-min-den-2026-04-20",
+      "title": "Suns vs. Thunder: O/U 212.5",
+      "slug": "nba-phx-okc-2026-04-22-total-212pt5",
       "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png",
-      "eventId": "382090",
-      "eventSlug": "nba-min-den-2026-04-20",
-      "outcome": "Timberwolves",
-      "outcomeIndex": 0,
-      "oppositeOutcome": "Nuggets",
-      "oppositeAsset": "77985259937045308793816579916638590572189987943927681873921893711796592307973",
-      "endDate": "2026-04-21",
+      "eventId": "391579",
+      "eventSlug": "nba-phx-okc-2026-04-22",
+      "outcome": "Under",
+      "outcomeIndex": 1,
+      "oppositeOutcome": "Over",
+      "oppositeAsset": "107522066901789299119423528273975254094927988780730589689435885467506648622631",
+      "endDate": "2026-04-23",
       "negativeRisk": false
     }
     
@@ -183,30 +181,30 @@ for name, address in WALLETS.items():
     First record:
     {
       "proxyWallet": "0x204f72f35326db932158cba6adff0b9a1da95e14",
-      "asset": "74242218918645333207499760215586417516176977896360830393316065607539566187019",
-      "conditionId": "0xee67dc2d6cdb80df4149af594158ff4d6f8b76780b35f156845c85488aed5e36",
-      "size": 15676.6855,
-      "avgPrice": 0.5322,
-      "initialValue": 8344.6683,
-      "currentValue": 8230.2599,
-      "cashPnl": -114.4084,
-      "percentPnl": -1.371,
-      "totalBought": 15725.4906,
+      "asset": "32970592838518231857960834683525212992911465765611987905622054312859827533999",
+      "conditionId": "0x8aa2f0b3b9edd1b07163286d3159c3a501d94cf0808841d5274336c68b1f7d44",
+      "size": 26214.4958,
+      "avgPrice": 0.6349,
+      "initialValue": 16645.0514,
+      "currentValue": 17170.4947,
+      "cashPnl": 525.4432,
+      "percentPnl": 3.1567,
+      "totalBought": 26485.9946,
       "realizedPnl": 0,
-      "percentRealizedPnl": -1.6771,
-      "curPrice": 0.525,
+      "percentRealizedPnl": 2.0993,
+      "curPrice": 0.655,
       "redeemable": false,
       "mergeable": true,
-      "title": "Will FC Internazionale Milano win on 2026-04-21?",
-      "slug": "itc-int-com-2026-04-21-int",
-      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/itc.png",
-      "eventId": "306840",
-      "eventSlug": "itc-int-com-2026-04-21",
-      "outcome": "Yes",
-      "outcomeIndex": 0,
-      "oppositeOutcome": "No",
-      "oppositeAsset": "77021733609879286707746138781235777402898124697034997655549907257716356269823",
-      "endDate": "2026-04-21",
+      "title": "Will Club Atl\u00e9tico de Madrid win on 2026-04-22?",
+      "slug": "lal-elc-mad-2026-04-22-mad",
+      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/league-lal.png",
+      "eventId": "359811",
+      "eventSlug": "lal-elc-mad-2026-04-22",
+      "outcome": "No",
+      "outcomeIndex": 1,
+      "oppositeOutcome": "Yes",
+      "oppositeAsset": "17684283368478579011485556298092659675294671893414587403391837552748491189817",
+      "endDate": "2026-04-22",
       "negativeRisk": true
     }
 
@@ -226,19 +224,19 @@ for name, address in WALLETS.items():
     rn1: [
       {
         "user": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
-        "value": 517349.941
+        "value": 547960.1841
       }
     ]
     sovereign: [
       {
         "user": "0xee613b3fc183ee44f9da9c05f53e2da107e3debf",
-        "value": 82537.4196
+        "value": 26881.2012
       }
     ]
     swisstony: [
       {
         "user": "0x204f72f35326db932158cba6adff0b9a1da95e14",
-        "value": 200664.8995
+        "value": 583961.2258
       }
     ]
 
@@ -271,21 +269,21 @@ for name, address in WALLETS.items():
     Most recent event:
     {
       "proxyWallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
-      "timestamp": 1776748930,
-      "conditionId": "0xf743001c011ce91856ef3eca6daacbce587a98d88ebbb8669c65437b4e1db06e",
+      "timestamp": 1776834846,
+      "conditionId": "0xd57db42dc26f8cdd6f26e9148ba5b40775af15ea104b6d0068ebfd4c7342d7aa",
       "type": "TRADE",
-      "size": 4.02,
-      "usdcSize": 1.8492,
-      "transactionHash": "0x395afda3f5a3efe1b1842ab2a0ab3836ccd0331c980414e1748421de2c4598ac",
-      "price": 0.46,
-      "asset": "113848110479592031259253354608837956257747317426814833913131888568473157087516",
+      "size": 27.6,
+      "usdcSize": 26.772,
+      "transactionHash": "0x55f5ebebc817457bdae312e378d536f91f80f59eb6674796046da6353753018d",
+      "price": 0.97,
+      "asset": "45949080565643676028230495363401189884973675894037073023779613649229440981535",
       "side": "BUY",
       "outcomeIndex": 1,
-      "title": "Gwangju: Alex Bolt vs Ilia Simakin",
-      "slug": "atp-bolt-simakin-2026-04-19",
-      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/atp-tour-b4390c4fb8.jpg",
-      "eventSlug": "atp-bolt-simakin-2026-04-19",
-      "outcome": "Ilia Simakin",
+      "title": "Rockets vs. Lakers",
+      "slug": "nba-hou-lal-2026-04-21",
+      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png",
+      "eventSlug": "nba-hou-lal-2026-04-21",
+      "outcome": "Lakers",
       "name": "RN1",
       "pseudonym": "Scary-Edible",
       "bio": "",
@@ -295,21 +293,21 @@ for name, address in WALLETS.items():
     Oldest in this page:
     {
       "proxyWallet": "0x2005d16a84ceefa912d4e380cd32e7ff827875ea",
-      "timestamp": 1776748904,
-      "conditionId": "0xa9a9acb457b3567dd8d1cacaa400ae6aec8e63f858a4560afdb612161e43e57c",
+      "timestamp": 1776834840,
+      "conditionId": "0xd57db42dc26f8cdd6f26e9148ba5b40775af15ea104b6d0068ebfd4c7342d7aa",
       "type": "TRADE",
-      "size": 78.947367,
-      "usdcSize": 63.947368,
-      "transactionHash": "0xdc17032436f5e03f36748f28d08e3c51a04b5ef046e9e0f67c704e0f5f9ad3da",
-      "price": 0.8100000092466668,
-      "asset": "101049751548410708430293002292169561720588907594020452919685141368802218026926",
+      "size": 33.333332,
+      "usdcSize": 32.333333,
+      "transactionHash": "0x86126652665b8ca88af078f75405ec1bf48001ac42780d7c469016f2623f50cd",
+      "price": 0.9700000288000011,
+      "asset": "45949080565643676028230495363401189884973675894037073023779613649229440981535",
       "side": "BUY",
-      "outcomeIndex": 0,
-      "title": "Timberwolves vs. Nuggets",
-      "slug": "nba-min-den-2026-04-20",
+      "outcomeIndex": 1,
+      "title": "Rockets vs. Lakers",
+      "slug": "nba-hou-lal-2026-04-21",
       "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png",
-      "eventSlug": "nba-min-den-2026-04-20",
-      "outcome": "Timberwolves",
+      "eventSlug": "nba-hou-lal-2026-04-21",
+      "outcome": "Lakers",
       "name": "RN1",
       "pseudonym": "Scary-Edible",
       "bio": "",
@@ -322,21 +320,21 @@ for name, address in WALLETS.items():
     Most recent event:
     {
       "proxyWallet": "0xee613b3fc183ee44f9da9c05f53e2da107e3debf",
-      "timestamp": 1776748908,
-      "conditionId": "0x09ad3ebd93fc9fcd06a3cdf3ef87e455680df700819f9152091c871e3eeb3a0d",
-      "type": "TRADE",
-      "size": 10,
-      "usdcSize": 4.7,
-      "transactionHash": "0xe596b123af4af90ae6c7a7aa93e5035bfc1bcd57ed5b34967eaf82dfddbec70e",
-      "price": 0.47,
-      "asset": "38458219072631761052185748920826760655200598268151429309818729848162840263562",
-      "side": "BUY",
-      "outcomeIndex": 0,
-      "title": "Spread: Rockets (-5.5)",
-      "slug": "nba-hou-lal-2026-04-21-spread-away-5pt5",
-      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png",
-      "eventSlug": "nba-hou-lal-2026-04-21",
-      "outcome": "Rockets",
+      "timestamp": 1776834768,
+      "conditionId": "0x3ae6b8df561c6dccddf6283ed060232a8e8bcb42959d7e54b0482f945683ffc3",
+      "type": "REDEEM",
+      "size": 469.387752,
+      "usdcSize": 469.387752,
+      "transactionHash": "0xafda8cec8c9d9aa2b9faa344f153e7ba50e74d5ab86d32490691de727f237704",
+      "price": 0,
+      "asset": "",
+      "side": "",
+      "outcomeIndex": 999,
+      "title": "Spread: Los Angeles Dodgers (-1.5)",
+      "slug": "mlb-lad-sf-2026-04-21-spread-away-1pt5",
+      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/Repetitive-markets/MLB.jpg",
+      "eventSlug": "mlb-lad-sf-2026-04-21",
+      "outcome": "",
       "name": "sovereign2013",
       "pseudonym": "Ultimate-Locality",
       "bio": "",
@@ -346,20 +344,20 @@ for name, address in WALLETS.items():
     Oldest in this page:
     {
       "proxyWallet": "0xee613b3fc183ee44f9da9c05f53e2da107e3debf",
-      "timestamp": 1776748368,
-      "conditionId": "0x5eb7402498c07e888c6b89f0413a41b950f62974b4745ad211d6423e377345dd",
+      "timestamp": 1776831168,
+      "conditionId": "0xc6786942d5d1e3530c2b0de4f9f5f6875ba9a793838f1ac988e4d0cb9670917d",
       "type": "REDEEM",
-      "size": 1665.48021,
-      "usdcSize": 1665.48021,
-      "transactionHash": "0x93270358e6a93d6f059fb42ef9c4bf5d2b1e92145983b3fa0f6aeb4617c5cc0a",
+      "size": 1002.56,
+      "usdcSize": 1002.56,
+      "transactionHash": "0xcd73d3058104bf355c4ad59a7c6bfb32ce1192e9b008868f7e30c183aa1bad63",
       "price": 0,
       "asset": "",
       "side": "",
       "outcomeIndex": 999,
-      "title": "Athletics vs. Seattle Mariners: O/U 7.5",
-      "slug": "mlb-oak-sea-2026-04-20-total-7pt5",
-      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/Repetitive-markets/MLB.jpg",
-      "eventSlug": "mlb-oak-sea-2026-04-20",
+      "title": "Bruins vs. Sabres",
+      "slug": "nhl-bos-buf-2026-04-21",
+      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/nhl.png",
+      "eventSlug": "nhl-bos-buf-2026-04-21",
       "outcome": "",
       "name": "sovereign2013",
       "pseudonym": "Ultimate-Locality",
@@ -373,21 +371,21 @@ for name, address in WALLETS.items():
     Most recent event:
     {
       "proxyWallet": "0x204f72f35326db932158cba6adff0b9a1da95e14",
-      "timestamp": 1776748916,
-      "conditionId": "0x45b6509d2504a671940c7c9967e56122bb30a4823b7d06bdad03d4f5a1021ea8",
-      "type": "REDEEM",
-      "size": 1580.949639,
-      "usdcSize": 1580.949639,
-      "transactionHash": "0x7da685cd17e7d4e3c615de8148f95390e12090f6ce10c22c3f70e77a72f18e90",
-      "price": 0,
-      "asset": "",
-      "side": "",
-      "outcomeIndex": 999,
-      "title": "Senators vs. Hurricanes",
-      "slug": "nhl-ott-car-2026-04-20",
-      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/nhl.png",
-      "eventSlug": "nhl-ott-car-2026-04-20",
-      "outcome": "",
+      "timestamp": 1776834838,
+      "conditionId": "0x94bc8d28b9b30405f18df92537c4f905492714613d674d79dc4eaf7d0c4a40d6",
+      "type": "TRADE",
+      "size": 71.905,
+      "usdcSize": 36.5,
+      "transactionHash": "0x777c1945a1316a1fb75b13c6763ffb365aca7456e1b28b0647d104956dc2a1c1",
+      "price": 0.5,
+      "asset": "5434892888476756561552847544174287868850309604401844213343369938992528074490",
+      "side": "BUY",
+      "outcomeIndex": 0,
+      "title": "Will FK Orenburg win on 2026-04-22?",
+      "slug": "rus-ore-nov-2026-04-22-ore",
+      "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/russian-premier-league-93612b0ab7.png",
+      "eventSlug": "rus-ore-nov-2026-04-22",
+      "outcome": "Yes",
       "name": "swisstony",
       "pseudonym": "Frail-Possible",
       "bio": "loincloth chic",
@@ -397,21 +395,21 @@ for name, address in WALLETS.items():
     Oldest in this page:
     {
       "proxyWallet": "0x204f72f35326db932158cba6adff0b9a1da95e14",
-      "timestamp": 1776748614,
-      "conditionId": "0xa9a9acb457b3567dd8d1cacaa400ae6aec8e63f858a4560afdb612161e43e57c",
+      "timestamp": 1776834512,
+      "conditionId": "0x62dee78c2621684e9475a39d0f9181dfe24b5d13cc01c3201eb6a9287c8cc8dd",
       "type": "TRADE",
-      "size": 333.5082,
-      "usdcSize": 155.94,
-      "transactionHash": "0x3214d653242cd54409ef7acd906ddb5524b2afb4169e83c8257cab4baca591b7",
-      "price": 0.46,
-      "asset": "77985259937045308793816579916638590572189987943927681873921893711796592307973",
+      "size": 49.97,
+      "usdcSize": 49,
+      "transactionHash": "0x2d7b280cb1fb976e093b93574724f55fadfa383f61e68ef8625608076145f8f1",
+      "price": 0.98,
+      "asset": "62235404601764175552254786179014005338468861457577445987184097407138409313584",
       "side": "BUY",
       "outcomeIndex": 1,
-      "title": "Timberwolves vs. Nuggets",
-      "slug": "nba-min-den-2026-04-20",
+      "title": "Spread: Rockets (-4.5)",
+      "slug": "nba-hou-lal-2026-04-21-spread-away-4pt5",
       "icon": "https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png",
-      "eventSlug": "nba-min-den-2026-04-20",
-      "outcome": "Nuggets",
+      "eventSlug": "nba-hou-lal-2026-04-21",
+      "outcome": "Lakers",
       "name": "swisstony",
       "pseudonym": "Frail-Possible",
       "bio": "loincloth chic",
@@ -420,7 +418,7 @@ for name, address in WALLETS.items():
     }
 
 
-### Erliest Activity
+### Earliest Activity
 
 
 ```python
@@ -445,7 +443,6 @@ for name, address in WALLETS.items():
 
 
 ```python
-from datetime import datetime, timezone, timedelta
 MIN_WINDOW_SECONDS = 3600  # 1 hour floor — prevents infinite recursion
 ```
 
@@ -454,23 +451,35 @@ MIN_WINDOW_SECONDS = 3600  # 1 hour floor — prevents infinite recursion
 def save_chunk(records, wallet_name):
     """
     Append a batch of records to the wallet's parquet file.
-    Uses parquet partitioning by appending a new row group.
-    If file doesn't exist yet, creates it.
+    Deduplicates using transactionHash when available, falling back
+    to a composite key for events that have empty transactionHash
+    (e.g. some SPLIT/MERGE events).
     """
     if not records:
         return
 
+    def make_dedup_key(row):
+        # transactionHash is reliable for TRADE and REDEEM.
+        # SPLIT/MERGE may return empty string — use composite fallback.
+        if row["transactionHash"]:
+            return row["transactionHash"]
+        return f"{row['timestamp']}_{row['conditionId']}_{row['type']}"
+
     path = f"{DATA_DIR}/activity_{wallet_name}.parquet"
     df   = pd.DataFrame(records)
+    df["_dedup_key"] = df.apply(make_dedup_key, axis=1)
 
     if os.path.exists(path):
-        existing = pd.read_parquet(path)
+        existing = pd.read_parquet(path, engine="fastparquet")
+        existing["_dedup_key"] = existing.apply(make_dedup_key, axis=1)
         combined = pd.concat([existing, df], ignore_index=True)
-        # Deduplicate on transactionHash at save time as a safety net
-        combined = combined.drop_duplicates(subset=["transactionHash"])
-        combined.to_parquet(path, index=False)
+        combined = combined.drop_duplicates(subset=["_dedup_key"])
+        combined = combined.drop(columns=["_dedup_key"])
+        combined.to_parquet(path, index=False, engine="fastparquet")
     else:
-        df.drop_duplicates(subset=["transactionHash"]).to_parquet(path, index=False)
+        df = df.drop_duplicates(subset=["_dedup_key"])
+        df = df.drop(columns=["_dedup_key"])
+        df.to_parquet(path, index=False, engine="fastparquet")
 ```
 
 
@@ -610,9 +619,513 @@ NOW_TS = int(datetime.now(tz=timezone.utc).timestamp())
 ledger = load_ledger()
 
 for name, address in WALLETS.items():
+    now_ts   = int(datetime.now(tz=timezone.utc).timestamp())  # fresh each wallet
     start_dt = datetime.fromtimestamp(WALLET_FIRST_TS[name], tz=timezone.utc).strftime("%Y-%m-%d")
     print(f"\n{'='*50}")
     print(f"Fetching {name} from {start_dt}")
-    total = fetch_activity_full(address, name, WALLET_FIRST_TS[name], NOW_TS, ledger)
+    total = fetch_activity_full(address, name, WALLET_FIRST_TS[name], now_ts, ledger)
     print(f"→ {name}: +{total} new records this run")
 ```
+
+    
+    ==================================================
+    Fetching rn1 from 2025-07-09
+      skip 2025-07-09 (already fetched)
+      skip 2025-07-16 (already fetched)
+      skip 2025-07-23 (already fetched)
+      skip 2025-07-30 (already fetched)
+      skip 2025-08-06 (already fetched)
+      skip 2025-08-13 (already fetched)
+      skip 2025-08-20 (already fetched)
+      skip 2025-08-27 (already fetched)
+      skip 2025-09-03 (already fetched)
+      skip 2025-09-10 (already fetched)
+      skip 2025-09-17 (already fetched)
+      skip 2025-09-24 (already fetched)
+      skip 2025-10-01 (already fetched)
+      skip 2025-10-08 (already fetched)
+      skip 2025-10-15 (already fetched)
+      skip 2025-10-22 (already fetched)
+      skip 2025-10-29 (already fetched)
+      skip 2025-11-05 (already fetched)
+      skip 2025-11-12 (already fetched)
+      skip 2025-11-19 (already fetched)
+      skip 2025-11-26 (already fetched)
+      skip 2025-12-03 (already fetched)
+      skip 2025-12-10 (already fetched)
+      skip 2025-12-17 (already fetched)
+      skip 2025-12-24 (already fetched)
+      skip 2025-12-31 (already fetched)
+      skip 2026-01-07 (already fetched)
+      skip 2026-01-14 (already fetched)
+      skip 2026-01-21 (already fetched)
+      skip 2026-01-28 (already fetched)
+      skip 2026-02-04 (already fetched)
+      skip 2026-02-11 (already fetched)
+      skip 2026-02-18 (already fetched)
+      skip 2026-02-25 (already fetched)
+      skip 2026-03-04 (already fetched)
+      skip 2026-03-11 (already fetched)
+      skip 2026-03-18 (already fetched)
+      skip 2026-03-25 (already fetched)
+      skip 2026-04-01 (already fetched)
+      skip 2026-04-08 (already fetched)
+      2026-04-15 12:02 | overflow → bisecting into two 82h windows
+        2026-04-15 12:02 | overflow → bisecting into two 41h windows
+          2026-04-15 12:02 | overflow → bisecting into two 20h windows
+            2026-04-15 12:02 | overflow → bisecting into two 10h windows
+              2026-04-15 12:02 | overflow → bisecting into two 5h windows
+                2026-04-15 12:02 | overflow → bisecting into two 2h windows
+                  2026-04-15 12:02 (+2h) | +2626 records
+                  2026-04-15 14:36 (+2h) | +1956 records
+                2026-04-15 17:10 | overflow → bisecting into two 2h windows
+                  2026-04-15 17:10 | overflow → bisecting into two 1h windows
+                    2026-04-15 17:10 (+1h) | +1816 records
+                    2026-04-15 18:27 (+1h) | +2777 records
+                  2026-04-15 19:44 | overflow → bisecting into two 1h windows
+                    2026-04-15 19:44 (+1h) | +3120 records
+                    2026-04-15 21:01 (+1h) | +664 records
+              2026-04-15 22:18 | overflow → bisecting into two 5h windows
+                2026-04-15 22:18 | overflow → bisecting into two 2h windows
+                  2026-04-15 22:18 (+2h) | +2700 records
+                  2026-04-16 00:52 | overflow → bisecting into two 1h windows
+                    2026-04-16 00:52 (+1h) | +1915 records
+                    2026-04-16 02:09 (+1h) | +1549 records
+                2026-04-16 03:26 (+5h) | +2584 records
+            2026-04-16 08:34 | overflow → bisecting into two 10h windows
+              2026-04-16 08:34 | overflow → bisecting into two 5h windows
+                2026-04-16 08:34 (+5h) | +2311 records
+                2026-04-16 13:41 | overflow → bisecting into two 2h windows
+                  2026-04-16 13:41 (+2h) | +1438 records
+                  2026-04-16 16:15 (+2h) | +3045 records
+              2026-04-16 18:49 | overflow → bisecting into two 5h windows
+                2026-04-16 18:49 | overflow → bisecting into two 2h windows
+                  2026-04-16 18:49 | overflow → bisecting into two 1h windows
+                    2026-04-16 18:49 (+1h) | +2843 records
+                    2026-04-16 20:06 (+1h) | +3167 records
+                  2026-04-16 21:23 (+2h) | +3253 records
+                2026-04-16 23:57 | overflow → bisecting into two 2h windows
+                  2026-04-16 23:57 | overflow → bisecting into two 1h windows
+                    2026-04-16 23:57 (+1h) | +2593 records
+                    2026-04-17 01:14 (+1h) | +2392 records
+                  2026-04-17 02:31 (+2h) | +1898 records
+          2026-04-17 05:05 | overflow → bisecting into two 20h windows
+            2026-04-17 05:05 | overflow → bisecting into two 10h windows
+              2026-04-17 05:05 | overflow → bisecting into two 5h windows
+                2026-04-17 05:05 (+5h) | +584 records
+                2026-04-17 10:12 | overflow → bisecting into two 2h windows
+                  2026-04-17 10:12 (+2h) | +1718 records
+                  2026-04-17 12:46 (+2h) | +2188 records
+              2026-04-17 15:20 | overflow → bisecting into two 5h windows
+                2026-04-17 15:20 | overflow → bisecting into two 2h windows
+                  2026-04-17 15:20 (+2h) | +2799 records
+                  2026-04-17 17:54 | overflow → bisecting into two 1h windows
+                    2026-04-17 17:54 (+1h) | +2058 records
+                    2026-04-17 19:11 (+1h) | +3013 records
+                2026-04-17 20:28 | overflow → bisecting into two 2h windows
+                  2026-04-17 20:28 (+2h) | +2683 records
+                  2026-04-17 23:02 (+2h) | +2820 records
+            2026-04-18 01:36 | overflow → bisecting into two 10h windows
+              2026-04-18 01:36 (+10h) | +2507 records
+              2026-04-18 11:51 | overflow → bisecting into two 5h windows
+                2026-04-18 11:51 | overflow → bisecting into two 2h windows
+                  2026-04-18 11:51 | overflow → bisecting into two 1h windows
+                    2026-04-18 11:51 (+1h) | +1497 records
+                    2026-04-18 13:08 (+1h) | +2299 records
+                  2026-04-18 14:25 | overflow → bisecting into two 1h windows
+                    2026-04-18 14:25 (+1h) | +2352 records
+                    2026-04-18 15:42 (+1h) | +1848 records
+                2026-04-18 16:59 | overflow → bisecting into two 2h windows
+                  2026-04-18 16:59 | overflow → bisecting into two 1h windows
+                    2026-04-18 16:59 (+1h) | +2924 records
+                    2026-04-18 18:16 (+1h) | +2700 records
+                  2026-04-18 19:33 | overflow → bisecting into two 1h windows
+                    2026-04-18 19:33 | overflow → bisecting into two 0h windows
+                      2026-04-18 19:33 (+0h) | +2077 records
+                      2026-04-18 20:12 (+0h) | +1508 records
+                    2026-04-18 20:50 (+1h) | +1939 records
+        2026-04-18 22:07 | overflow → bisecting into two 41h windows
+          2026-04-18 22:07 | overflow → bisecting into two 20h windows
+            2026-04-18 22:07 | overflow → bisecting into two 10h windows
+              2026-04-18 22:07 | overflow → bisecting into two 5h windows
+                2026-04-18 22:07 | overflow → bisecting into two 2h windows
+                  2026-04-18 22:07 | overflow → bisecting into two 1h windows
+                    2026-04-18 22:07 (+1h) | +1933 records
+                    2026-04-18 23:24 (+1h) | +1664 records
+                  2026-04-19 00:41 (+2h) | +3210 records
+                2026-04-19 03:15 (+5h) | +986 records
+              2026-04-19 08:23 | overflow → bisecting into two 5h windows
+                2026-04-19 08:23 | overflow → bisecting into two 2h windows
+                  2026-04-19 08:23 (+2h) | +347 records
+                  2026-04-19 10:56 | overflow → bisecting into two 1h windows
+                    2026-04-19 10:56 (+1h) | +1417 records
+                    2026-04-19 12:13 (+1h) | +1892 records
+                2026-04-19 13:30 | overflow → bisecting into two 2h windows
+                  2026-04-19 13:30 | overflow → bisecting into two 1h windows
+                    2026-04-19 13:30 (+1h) | +2845 records
+                    2026-04-19 14:47 (+1h) | +2335 records
+                  2026-04-19 16:04 | overflow → bisecting into two 1h windows
+                    2026-04-19 16:04 (+1h) | +2686 records
+                    2026-04-19 17:21 (+1h) | +2300 records
+            2026-04-19 18:38 | overflow → bisecting into two 10h windows
+              2026-04-19 18:38 | overflow → bisecting into two 5h windows
+                2026-04-19 18:38 | overflow → bisecting into two 2h windows
+                  2026-04-19 18:38 | overflow → bisecting into two 1h windows
+                    2026-04-19 18:38 (+1h) | +2994 records
+                    2026-04-19 19:55 (+1h) | +2808 records
+                  2026-04-19 21:12 | overflow → bisecting into two 1h windows
+                    2026-04-19 21:12 (+1h) | +1358 records
+                    2026-04-19 22:29 (+1h) | +2542 records
+                2026-04-19 23:46 | overflow → bisecting into two 2h windows
+                  2026-04-19 23:46 (+2h) | +3081 records
+                  2026-04-20 02:20 (+2h) | +928 records
+              2026-04-20 04:54 (+10h) | +2612 records
+          2026-04-20 15:09 | overflow → bisecting into two 20h windows
+            2026-04-20 15:09 | overflow → bisecting into two 10h windows
+              2026-04-20 15:09 | overflow → bisecting into two 5h windows
+                2026-04-20 15:09 | overflow → bisecting into two 2h windows
+                  2026-04-20 15:09 (+2h) | +1125 records
+                  2026-04-20 17:43 | overflow → bisecting into two 1h windows
+                    2026-04-20 17:43 (+1h) | +2741 records
+                    2026-04-20 19:00 (+1h) | +1405 records
+                2026-04-20 20:17 | overflow → bisecting into two 2h windows
+                  2026-04-20 20:17 (+2h) | +2142 records
+                  2026-04-20 22:51 (+2h) | +2724 records
+              2026-04-21 01:25 | overflow → bisecting into two 5h windows
+                2026-04-21 01:25 | overflow → bisecting into two 2h windows
+                  2026-04-21 01:25 | overflow → bisecting into two 1h windows
+                    2026-04-21 01:25 (+1h) | +1823 records
+                    2026-04-21 02:42 (+1h) | +1918 records
+                  2026-04-21 03:59 (+2h) | +1765 records
+                2026-04-21 06:33 (+5h) | +2683 records
+            2026-04-21 11:41 | overflow → bisecting into two 10h windows
+              2026-04-21 11:41 | overflow → bisecting into two 5h windows
+                2026-04-21 11:41 | overflow → bisecting into two 2h windows
+                  2026-04-21 11:41 (+2h) | +2450 records
+                  2026-04-21 14:14 (+2h) | +1648 records
+                2026-04-21 16:48 | overflow → bisecting into two 2h windows
+                  2026-04-21 16:48 (+2h) | +2984 records
+                  2026-04-21 19:22 | overflow → bisecting into two 1h windows
+                    2026-04-21 19:22 (+1h) | +2170 records
+                    2026-04-21 20:39 (+1h) | +1896 records
+              2026-04-21 21:56 | overflow → bisecting into two 5h windows
+                2026-04-21 21:56 | overflow → bisecting into two 2h windows
+                  2026-04-21 21:56 (+2h) | +2182 records
+                  2026-04-22 00:30 (+2h) | +3265 records
+                2026-04-22 03:04 (+5h) | +2905 records
+    → rn1: +159894 new records this run
+    
+    ==================================================
+    Fetching sovereign from 2025-08-07
+      skip 2025-08-07 (already fetched)
+      skip 2025-08-14 (already fetched)
+      skip 2025-08-21 (already fetched)
+      skip 2025-08-28 (already fetched)
+      skip 2025-09-04 (already fetched)
+      skip 2025-09-11 (already fetched)
+      skip 2025-09-18 (already fetched)
+      skip 2025-09-25 (already fetched)
+      skip 2025-10-02 (already fetched)
+      skip 2025-10-09 (already fetched)
+      skip 2025-10-16 (already fetched)
+      skip 2025-10-23 (already fetched)
+      skip 2025-10-30 (already fetched)
+      skip 2025-11-06 (already fetched)
+      skip 2025-11-13 (already fetched)
+      skip 2025-11-20 (already fetched)
+      skip 2025-11-27 (already fetched)
+      skip 2025-12-04 (already fetched)
+      skip 2025-12-11 (already fetched)
+      skip 2025-12-18 (already fetched)
+      skip 2025-12-25 (already fetched)
+      skip 2026-01-01 (already fetched)
+      skip 2026-01-08 (already fetched)
+      skip 2026-01-15 (already fetched)
+      skip 2026-01-22 (already fetched)
+      skip 2026-01-29 (already fetched)
+      skip 2026-02-05 (already fetched)
+      skip 2026-02-12 (already fetched)
+      skip 2026-02-19 (already fetched)
+      skip 2026-02-26 (already fetched)
+      skip 2026-03-05 (already fetched)
+      skip 2026-03-12 (already fetched)
+      skip 2026-03-19 (already fetched)
+      skip 2026-03-26 (already fetched)
+      skip 2026-04-02 (already fetched)
+      skip 2026-04-09 (already fetched)
+      2026-04-16 14:54 | overflow → bisecting into two 68h windows
+        2026-04-16 14:54 | overflow → bisecting into two 34h windows
+          2026-04-16 14:54 | overflow → bisecting into two 17h windows
+            2026-04-16 14:54 | overflow → bisecting into two 8h windows
+              2026-04-16 14:54 | overflow → bisecting into two 4h windows
+                2026-04-16 14:54 (+4h) | +1446 records
+                2026-04-16 19:12 (+4h) | +2615 records
+              2026-04-16 23:30 (+8h) | +2095 records
+            2026-04-17 08:06 (+17h) | +2639 records
+          2026-04-18 01:17 (+34h) | +3150 records
+        2026-04-19 11:40 | overflow → bisecting into two 34h windows
+          2026-04-19 11:40 | overflow → bisecting into two 17h windows
+            2026-04-19 11:40 | overflow → bisecting into two 8h windows
+              2026-04-19 11:40 (+8h) | +1947 records
+              2026-04-19 20:15 (+8h) | +2261 records
+            2026-04-20 04:51 | overflow → bisecting into two 8h windows
+              2026-04-20 04:51 (+8h) | +1531 records
+              2026-04-20 13:27 (+8h) | +1996 records
+          2026-04-20 22:02 | overflow → bisecting into two 17h windows
+            2026-04-20 22:02 | overflow → bisecting into two 8h windows
+              2026-04-20 22:02 (+8h) | +2600 records
+              2026-04-21 06:38 (+8h) | +1931 records
+            2026-04-21 15:14 (+17h) | +1957 records
+    → sovereign: +26167 new records this run
+    
+    ==================================================
+    Fetching swisstony from 2025-08-09
+      skip 2025-08-09 (already fetched)
+      skip 2025-08-16 (already fetched)
+      skip 2025-08-23 (already fetched)
+      skip 2025-08-30 (already fetched)
+      skip 2025-09-06 (already fetched)
+      skip 2025-09-13 (already fetched)
+      skip 2025-09-20 (already fetched)
+      skip 2025-09-27 (already fetched)
+      skip 2025-10-04 (already fetched)
+      skip 2025-10-11 (already fetched)
+      skip 2025-10-18 (already fetched)
+      skip 2025-10-25 (already fetched)
+      skip 2025-11-01 (already fetched)
+      skip 2025-11-08 (already fetched)
+      skip 2025-11-15 (already fetched)
+      skip 2025-11-22 (already fetched)
+      skip 2025-11-29 (already fetched)
+      skip 2025-12-06 (already fetched)
+      skip 2025-12-13 (already fetched)
+      skip 2025-12-20 (already fetched)
+      skip 2025-12-27 (already fetched)
+      skip 2026-01-03 (already fetched)
+      skip 2026-01-10 (already fetched)
+      skip 2026-01-17 (already fetched)
+      skip 2026-01-24 (already fetched)
+      skip 2026-01-31 (already fetched)
+      skip 2026-02-07 (already fetched)
+      skip 2026-02-14 (already fetched)
+      skip 2026-02-21 (already fetched)
+      skip 2026-02-28 (already fetched)
+      skip 2026-03-07 (already fetched)
+      skip 2026-03-14 (already fetched)
+      skip 2026-03-21 (already fetched)
+      skip 2026-03-28 (already fetched)
+      skip 2026-04-04 (already fetched)
+      skip 2026-04-11 (already fetched)
+      2026-04-18 05:09 | overflow → bisecting into two 49h windows
+        2026-04-18 05:09 | overflow → bisecting into two 24h windows
+          2026-04-18 05:09 | overflow → bisecting into two 12h windows
+            2026-04-18 05:09 | overflow → bisecting into two 6h windows
+              2026-04-18 05:09 | overflow → bisecting into two 3h windows
+                2026-04-18 05:09 (+3h) | +3232 records
+                2026-04-18 08:15 (+3h) | +1600 records
+              2026-04-18 11:21 | overflow → bisecting into two 3h windows
+                2026-04-18 11:21 | overflow → bisecting into two 1h windows
+                  2026-04-18 11:21 (+1h) | +2366 records
+                  2026-04-18 12:54 (+1h) | +3117 records
+                2026-04-18 14:27 | overflow → bisecting into two 1h windows
+                  2026-04-18 14:27 (+1h) | +2935 records
+                  2026-04-18 16:00 (+1h) | +2324 records
+            2026-04-18 17:33 | overflow → bisecting into two 6h windows
+              2026-04-18 17:33 | overflow → bisecting into two 3h windows
+                2026-04-18 17:33 | overflow → bisecting into two 1h windows
+                  2026-04-18 17:33 (+1h) | +2198 records
+                  2026-04-18 19:07 (+1h) | +2216 records
+                2026-04-18 20:40 | overflow → bisecting into two 1h windows
+                  2026-04-18 20:40 (+1h) | +1377 records
+                  2026-04-18 22:13 (+1h) | +2973 records
+              2026-04-18 23:46 | overflow → bisecting into two 3h windows
+                2026-04-18 23:46 | overflow → bisecting into two 1h windows
+                  2026-04-18 23:46 (+1h) | +1976 records
+                  2026-04-19 01:19 (+1h) | +1720 records
+                2026-04-19 02:52 | overflow → bisecting into two 1h windows
+                  2026-04-19 02:52 (+1h) | +2280 records
+                  2026-04-19 04:25 (+1h) | +2035 records
+          2026-04-19 05:58 | overflow → bisecting into two 12h windows
+            2026-04-19 05:58 | overflow → bisecting into two 6h windows
+              2026-04-19 05:58 | overflow → bisecting into two 3h windows
+                2026-04-19 05:58 (+3h) | +2923 records
+                2026-04-19 09:05 (+3h) | +2657 records
+              2026-04-19 12:11 | overflow → bisecting into two 3h windows
+                2026-04-19 12:11 | overflow → bisecting into two 1h windows
+                  2026-04-19 12:11 (+1h) | +2521 records
+                  2026-04-19 13:44 (+1h) | +2209 records
+                2026-04-19 15:17 | overflow → bisecting into two 1h windows
+                  2026-04-19 15:17 (+1h) | +3118 records
+                  2026-04-19 16:50 (+1h) | +2243 records
+            2026-04-19 18:23 | overflow → bisecting into two 6h windows
+              2026-04-19 18:23 | overflow → bisecting into two 3h windows
+                2026-04-19 18:23 (+3h) | +2531 records
+                2026-04-19 21:29 (+3h) | +2789 records
+              2026-04-20 00:36 | overflow → bisecting into two 3h windows
+                2026-04-20 00:36 (+3h) | +2020 records
+                2026-04-20 03:42 (+3h) | +2302 records
+        2026-04-20 06:48 | overflow → bisecting into two 24h windows
+          2026-04-20 06:48 | overflow → bisecting into two 12h windows
+            2026-04-20 06:48 (+12h) | +2966 records
+            2026-04-20 19:13 | overflow → bisecting into two 6h windows
+              2026-04-20 19:13 (+6h) | +3282 records
+              2026-04-21 01:25 (+6h) | +2447 records
+          2026-04-21 07:38 | overflow → bisecting into two 12h windows
+            2026-04-21 07:38 | overflow → bisecting into two 6h windows
+              2026-04-21 07:38 (+6h) | +2507 records
+              2026-04-21 13:50 | overflow → bisecting into two 3h windows
+                2026-04-21 13:50 (+3h) | +984 records
+                2026-04-21 16:56 (+3h) | +3391 records
+            2026-04-21 20:03 | overflow → bisecting into two 6h windows
+              2026-04-21 20:03 | overflow → bisecting into two 3h windows
+                2026-04-21 20:03 (+3h) | +2518 records
+                2026-04-21 23:09 (+3h) | +1642 records
+              2026-04-22 02:15 (+6h) | +2724 records
+    → swisstony: +80113 new records this run
+
+
+## Data Validation 
+
+
+```python
+import os
+
+print("=" * 50)
+print("1. FILE SIZES")
+print("=" * 50)
+for name in WALLETS:
+    path = f"{DATA_DIR}/activity_{name}.parquet"
+    if os.path.exists(path):
+        df      = pd.read_parquet(path, engine="fastparquet")
+        size_mb = os.path.getsize(path) / 1024 / 1024
+        print(f"{name}: {len(df):,} rows | {size_mb:.1f} MB")
+    else:
+        print(f"{name}: ⚠️  FILE NOT FOUND")
+
+print()
+print("=" * 50)
+print("2. DATE RANGE COVERAGE")
+print("=" * 50)
+for name, address in WALLETS.items():
+    path = f"{DATA_DIR}/activity_{name}.parquet"
+    df   = pd.read_parquet(path, engine="fastparquet")
+    df["datetime"] = pd.to_datetime(df["timestamp"], unit="s", utc=True)
+    earliest = df["datetime"].min()
+    latest   = df["datetime"].max()
+    expected = datetime.fromtimestamp(WALLET_FIRST_TS[name], tz=timezone.utc)
+    gap_days = (earliest - expected).days
+    print(f"{name}:")
+    print(f"  expected start : {expected.strftime('%Y-%m-%d')}")
+    print(f"  actual start   : {earliest.strftime('%Y-%m-%d')}")
+    print(f"  actual end     : {latest.strftime('%Y-%m-%d')}")
+    if gap_days > 1:
+        print(f"  ⚠️  gap of {gap_days} days at start — possible missing data")
+    else:
+        print(f"  ✓ start coverage looks good")
+
+print()
+print("=" * 50)
+print("3. DUPLICATE CHECK")
+print("=" * 50)
+for name in WALLETS:
+    path = f"{DATA_DIR}/activity_{name}.parquet"
+    df   = pd.read_parquet(path, engine="fastparquet")
+
+    # transactionHash duplicates
+    tx_dupes = df[df["transactionHash"] != ""]["transactionHash"].duplicated().sum()
+
+    # timestamp gaps > 7 days (potential missing windows)
+    df_sorted = df.sort_values("timestamp")
+    gaps      = df_sorted["timestamp"].diff()
+    big_gaps  = gaps[gaps > 7 * 86400]
+
+    print(f"{name}:")
+    print(f"  duplicate transactionHashes : {tx_dupes}")
+    if len(big_gaps) > 0:
+        for idx, gap_sec in big_gaps.items():
+            gap_ts = df_sorted.loc[idx, "timestamp"]
+            gap_dt = datetime.fromtimestamp(gap_ts, tz=timezone.utc).strftime("%Y-%m-%d")
+            print(f"  ⚠️  gap of {gap_sec/86400:.1f} days ending at {gap_dt}")
+    else:
+        print(f"  ✓ no gaps > 7 days in activity")
+
+print()
+print("=" * 50)
+print("4. EVENT TYPE DISTRIBUTION")
+print("=" * 50)
+for name in WALLETS:
+    path = f"{DATA_DIR}/activity_{name}.parquet"
+    df   = pd.read_parquet(path, engine="fastparquet")
+    dist = df["type"].value_counts()
+    print(f"\n{name} — {len(df):,} total rows")
+    print(dist.to_string())
+```
+
+    ==================================================
+    1. FILE SIZES
+    ==================================================
+    rn1: 2,284,740 rows | 284.5 MB
+    sovereign: 1,271,210 rows | 160.4 MB
+    swisstony: 3,263,685 rows | 440.8 MB
+    
+    ==================================================
+    2. DATE RANGE COVERAGE
+    ==================================================
+    rn1:
+      expected start : 2025-07-09
+      actual start   : 2025-07-09
+      actual end     : 2026-04-22
+      ✓ start coverage looks good
+    sovereign:
+      expected start : 2025-08-07
+      actual start   : 2025-08-07
+      actual end     : 2026-04-22
+      ✓ start coverage looks good
+    swisstony:
+      expected start : 2025-08-09
+      actual start   : 2025-08-09
+      actual end     : 2026-04-22
+      ✓ start coverage looks good
+    
+    ==================================================
+    3. DUPLICATE CHECK
+    ==================================================
+    rn1:
+      duplicate transactionHashes : 0
+      ✓ no gaps > 7 days in activity
+    sovereign:
+      duplicate transactionHashes : 0
+      ⚠️  gap of 19.0 days ending at 2025-09-09
+    swisstony:
+      duplicate transactionHashes : 0
+      ✓ no gaps > 7 days in activity
+    
+    ==================================================
+    4. EVENT TYPE DISTRIBUTION
+    ==================================================
+    
+    rn1 — 2,284,740 total rows
+    type
+    TRADE           2273606
+    REDEEM             6599
+    MERGE              4409
+    REWARD               83
+    MAKER_REBATE         42
+    CONVERSION            1
+    
+    sovereign — 1,271,210 total rows
+    type
+    TRADE           1194755
+    REDEEM            40207
+    MERGE             36125
+    REWARD               74
+    MAKER_REBATE         49
+    
+    swisstony — 3,263,685 total rows
+    type
+    TRADE           3120513
+    REDEEM           140605
+    MERGE              2433
+    REWARD               84
+    MAKER_REBATE         50
+
